@@ -98,8 +98,7 @@ Heart.prototype.draw = function(){
 };
 
 
-function render(a){
-  requestAnimationFrame(render);
+function render(){
   j+=1;
   if(j%20==0){
     hearts.push(new Heart());
@@ -112,7 +111,7 @@ function render(a){
       i--;
     }
   }
-
+  requestAnimationFrame(render);
 }
 
 

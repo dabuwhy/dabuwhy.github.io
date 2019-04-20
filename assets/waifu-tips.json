@@ -25,18 +25,14 @@
             "none": ["欢迎阅读<span style=\"color:#0099cc;\">『", "』</span>", " - "]
         },
         "referrer_hostname": {
-            "example.com": ["示例网站"],
-            "www.fghrsh.net": ["FGHRSH 的博客"]
+            "example.com": ["示例网站"]
         },
         "model_message": {
             "1": ["来自 Potion Maker 的 Pio 酱 ~"],
             "2": ["来自 Potion Maker 的 Tia 酱 ~"]  
         },
         "hitokoto_api_message": {
-            "lwl12.com": ["这句一言来自 <span style=\"color:#0099cc;\">『{source}』</span>", "，是 <span style=\"color:#0099cc;\">{creator}</span> 投稿的", "。"],
-            "fghrsh.net": ["这句一言出处是 <span style=\"color:#0099cc;\">『{source}』</span>，是 <span style=\"color:#0099cc;\">FGHRSH</span> 在 {date} 收藏的！"],
-            "jinrishici.com": ["这句诗词出自 <span style=\"color:#0099cc;\">《{title}》</span>，是 {dynasty}诗人 {author} 创作的！"],
-            "hitokoto.cn": ["这句一言来自 <span style=\"color:#0099cc;\">『{source}』</span>，是 <span style=\"color:#0099cc;\">{creator}</span> 在 hitokoto.cn 投稿的。"]
+
         }
     },
     "mouseover": [
@@ -75,11 +71,7 @@
         {
             "selector": ".waifu #live2d",
             "text": [
-                "是…是不小心碰到了吧",
-                "萝莉控是什么呀",
-                "你看到我的小熊了吗",
-                "再摸的话我可要报警了！⌇●﹏●⌇",
-                "110吗，这里有个变态一直在摸我(ó﹏ò｡)"
+                "hello world"
             ]
         }
     ],
@@ -93,8 +85,6 @@
         { "date": "06/01", "text": ["<span style=\"color:#0099cc;\">儿童节</span>了呢，快活的时光总是短暂，要是永远长不大该多好啊…"] },
         { "date": "09/03", "text": ["<span style=\"color:#0099cc;\">中国人民抗日战争胜利纪念日</span>，铭记历史、缅怀先烈、珍爱和平、开创未来。"] },
         { "date": "09/10", "text": ["<span style=\"color:#0099cc;\">教师节</span>，在学校要给老师问声好呀~"] },
-        { "date": "10/01", "text": ["<span style=\"color:#0099cc;\">国庆节</span>，新中国已经成立69年了呢"] },
-        { "date": "11/05-11/12", "text": ["今年的<span style=\"color:#0099cc;\">双十一</span>是和谁一起过的呢~"] },
-        { "date": "12/20-12/31", "text": ["这几天是<span style=\"color:#0099cc;\">圣诞节</span>，主人肯定又去剁手买买买了~"] }
+        { "date": "10/01", "text": ["<span style=\"color:#0099cc;\">国庆节</span>"] }
     ]
 }
