@@ -1,0 +1,128 @@
+---
+layout: post
+title:  "hopeful life"
+date:   2019-04-20 00:00:00 +0000
+categories: jekyll new
+tag:	haha 
+musicId: [540042,]
+---
+to sdwhwxt<br/>
+
+<canvas id="wy"></canvas> <!--canvas 画布-->
+
+<script>
+var canvas = document.getElementById("wy"),
+ctx = canvas.getContext("2d");
+
+var ww,wh;
+
+function onResize(){
+  ww = canvas.width = document.getElementsByClassName("wrapper")[0].offsetWidth;
+  wh = canvas.height = window.innerHeight;
+}
+
+ctx.strokeStyle = "red";
+ctx.shadowBlur = 25;
+ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+
+var precision = 100;
+var hearts = [],lastPos=[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
+var j=0,k=0;
+function onMove(e){
+	/*if(e.type=="touchstart"){
+        hearts.push(new Heart(e.touches[e.which].pageX, e.touches[e.which].pageY-canvas.offsetTop));
+        lastPos[e.which]=[e.touches[e.which].pageX, e.touches[e.which].pageY-canvas.offsetTop];
+        return;
+	};*/
+    if(e.type=="mousemove"&&e.pageX>canvas.offsetLeft&&e.pageY>canvas.offsetTop&&e.pageX<ww+canvas.offsetLeft&&e.pageY<wh+canvas.offsetTop){
+        if((e.offsetX-lastPos[0][0])*(e.offsetX-lastPos[0][0])+(e.offsetY-lastPos[0][1])*(e.offsetY-lastPos[0][1])>900){
+            lastPos[0]=[e.offsetX,e.offsetY];
+            //hearts.push(new Heart(e.clientX-canvas.offsetLeft, e.clientY-canvas.offsetTop+(document.documentElement.scrollTop || document.body.scrollTop)));
+            hearts.push(new Heart(e.offsetX,e.offsetY));
+        }
+        return;
+    }
+    if(e.type=="touchmove"){
+        for(var i=0;i<e.touches.length;i++){
+            if((e.touches[i].pageX-lastPos[i][0])*(e.touches[i].pageX-lastPos[i][0])+(e.touches[i].pageY-lastPos[i][1])*(e.touches[i].pageY-lastPos[i][1])>900){
+                lastPos[i]=[e.touches[i].pageX,e.touches[i].pageY];
+                hearts.push(new Heart(e.touches[i].pageX-canvas.offsetLeft, e.touches[i].pageY-canvas.offsetTop));
+            }
+        }
+    }
+}
+
+var Heart = function(x,y){
+  this.x = x || Math.random()*ww;
+  this.x0=this.x;
+  this.y = y || Math.random()*wh;
+  this.y0=this.y;
+  this.size = Math.random()*2 + 4;
+  this.shadowBlur = Math.random() * 2;
+  if(Math.random()>0.5) this.speedX = (Math.random()-0.5) +1.5;
+  else this.speedX = (Math.random()-0.5) -1.5;
+  this.speedY = (Math.random()-0.5) * 6;
+  this.speedSize = Math.random()*0.01 + 0.02;
+  this.opacity = 1;
+  this.vertices = [];
+  for (var i = 0; i < precision; i++) {
+    var step = (i / precision - 0.5) * (Math.PI * 2);
+    var vector = {
+      x : (15 * Math.pow(Math.sin(step), 3)),
+      y : -(13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step)) 
+    }
+    this.vertices.push(vector);
+  }
+}
+
+Heart.prototype.draw = function(){
+  this.size -= this.speedSize;
+  this.x += this.speedX;
+  this.y = this.y0-80+0.05*(Math.abs(this.x-this.x0)-40)*(Math.abs(this.x-this.x0)-40);//this.speedY;
+  ctx.save();
+  ctx.translate(-1000,this.y);
+  ctx.scale(this.size, this.size);
+  ctx.beginPath();
+  for (var i = 0; i < precision; i++) {
+    var vector = this.vertices[i];
+    ctx.lineTo(vector.x, vector.y);
+  }
+  ctx.globalAlpha = this.size;
+  ctx.shadowBlur = Math.round((3 - this.size) * 10);
+  ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+  ctx.shadowOffsetX = this.x + 1000;
+  ctx.globalCompositeOperation = "screen"
+  ctx.closePath();
+  ctx.fill()
+  ctx.restore();
+};
+
+
+function render(a){
+  requestAnimationFrame(render);
+  j+=1;
+  if(j%20==0){
+    hearts.push(new Heart());
+  }
+  ctx.clearRect(0,0,ww,wh);
+  for (var i = 0; i < hearts.length; i++) {
+    hearts[i].draw();
+    if(hearts[i].size <= 0){
+      hearts.splice(i,1);
+      i--;
+    }
+  }
+
+}
+
+
+onResize();
+window.addEventListener("mousemove", onMove);
+window.addEventListener("touchmove", onMove);
+//window.addEventListener("touchstart", onMove);
+window.addEventListener("resize", onResize);
+requestAnimationFrame(render);
+
+</script>
+
+

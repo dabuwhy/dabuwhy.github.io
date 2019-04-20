@@ -1,0 +1,10 @@
+{% if page.comments != false %}
+	<h3><b>IntenseDebate留言系统：</b></h3>
+    <script>
+    var idcomments_acct = '2a9dd9086e53535867e2244f214ae7f7';
+    var idcomments_post_id = '{{ page.url }}';
+    var idcomments_post_url;
+    </script>
+    <span id="IDCommentsPostTitle" style="display:none"></span>
+	<script type='text/javascript' src='https://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+{% endif %}
