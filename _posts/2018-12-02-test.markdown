@@ -56,8 +56,8 @@ git pull origin master //从Github上pull到本地源码库--更新至最新版�
 Check out the [baidu][baidu] for more info 
 
 [baidu]: https://baidu.com
-<mp3>http://music.163.com/song/media/outer/url?id={{page.musicId}}.mp3</mp3> <br/>
+<mp3>https://music.163.com/song/media/outer/url?id={{page.musicId}}.mp3</mp3> <br/>
 
-<mp4>http://player.bilibili.com/player.html?aid={{page.videoId}}&cid=2203981&page=1</mp4>
+<mp4>https://player.bilibili.com/player.html?aid={{page.videoId}}&cid=2203981&page=1</mp4>
 
 
