@@ -49,7 +49,7 @@ live2d_settings['showF12Status']        = true;         // 显示加载状态
 live2d_settings['showF12Message']       = false;        // 显示看板娘消息
 live2d_settings['showF12OpenMsg']       = true;         // 显示控制台打开提示
 live2d_settings['showCopyMessage']      = true;         // 显示 复制内容 提示
-live2d_settings['showWelcomeMessage']   = true;         // 显示进入面页欢迎词
+live2d_settings['showWelcomeMessage']   = false;         // 显示进入面页欢迎词
 
 //看板娘样式设置
 live2d_settings['waifuSize']            = '280x250';    // 看板娘大小，例如 '280x250', '600x535'
@@ -96,15 +96,19 @@ console.log(re);
 function empty(obj) {return typeof obj=="undefined"||obj==null||obj==""?true:false}
 function getRandText(text) {return Array.isArray(text) ? text[Math.floor(Math.random() * text.length + 1)-1] : text}
 
+var wy=0;
 function showMessage(text, timeout, flag) {
     if(flag || sessionStorage.getItem('waifu-text') === '' || sessionStorage.getItem('waifu-text') === null){
-        if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
+        if(Array.isArray(text)){
+            text = text[wy%text.length];
+            wy++;
+        }
         if (live2d_settings.showF12Message) console.log('[Message]', text.replace(/<[^<>]+>/g,''));
         
         if(flag) sessionStorage.setItem('waifu-text', text);
         
         $('.waifu-tips').stop();
-        $('.waifu-tips').html(text).fadeTo(200, 1);
+        $('.waifu-tips').html(text).fadeTo(200, 2);
         if (timeout === undefined) timeout = 5000;
         hideMessage(timeout);
     }
