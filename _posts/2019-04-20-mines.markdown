@@ -8,20 +8,34 @@ tag:	haha
 ---
 
 
-<canvas id="wy"></canvas> <!--canvas 画布-->
+<canvas id="canvas" ></canvas> <br/>
+rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:<input type="text" id="mineIn" />
+<input type="submit" value="SET" onclick="setIn()"/>
 
 <script type="text/javascript">
 	//author:wy
-	var canvas=document.getElementById("wy");
+	var canvas=document.getElementById("canvas");
 	var ctx=canvas.getContext("2d");
-	var colors=['#6CA6CD','#FF3030','#EEC900','#3A5FCD','#008B00','#1874CD','#8B0A50','#EE7621','#CD69C9','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000'];
+	var colors=['#6CA6CD','#FF3030','#EEC900','#3A5FCD','#008B00','#EE7621','#8B0A50','#CD69C9','#1874CD','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000'];
 	var cols=30,rows=16,cellpix=50,mCount=99,timeCols=4;
 	//var cols=10,rows=10,cellpix=50,mCount=10;
 	var mines=new Array();		//0:init 11-20:mine |0x40:flag |0x80:click
 	var minesAns=new Array();
 	var mouseState=0;
-	var start=0,costTime=0,space=cols*rows-mCount;
-	
+	var start=0,costTime=0,space=cols*rows-mCount,mineC=mCount;
+	var rowIn=document.getElementById("rowIn");
+	var colIn=document.getElementById("colIn");
+	var mineIn=document.getElementById("mineIn");
+	rowIn.value=rows;
+	colIn.value=cols;
+	mineIn.value=mCount;
+	function setIn(){
+		rows=parseInt(rowIn.value);
+		cols=parseInt(colIn.value);
+		mCount=parseInt(mineIn.value);
+		//console.log(rows,cols,mCount);
+		restart();
+	}
 	function getNeighbor(r,c){
 		var nei=new Array();
 		if(r>0){
@@ -97,7 +111,7 @@ tag:	haha
 		}
 	}
 	function init(){
-		var i=(window.innerHeight-10)/rows;
+		var i=(window.innerHeight-30)/rows;
 		var j=(window.innerWidth-10)/(cols+timeCols);
 		cellpix=(i<j)?i:j;
 		//console.log(cellpix);
@@ -126,10 +140,13 @@ tag:	haha
 			}
 		}
 		mouseState=0;
+		drawTimeCol(0,"Time:"+(costTime).toString());
+		drawTimeCol(1,"Mine:"+mineC.toString())
 	}
 	function restart(){
 		minesAns=[];
 		space=cols*rows-mCount;
+		mineC=mCount;
 		start=0;
 		costTime=0;
 		for(var i=0;i<rows;i++){
@@ -284,6 +301,13 @@ tag:	haha
 				var [r,c]=getRC(e.x,e.y);
 				//console.log(r,c);
 				if(mines[r][c]<0x80){
+					if((mines[r][c]&0x40)==0){
+						mineC--;
+					}
+					else{
+						mineC++;
+					}
+					drawTimeCol(1,"Mine:"+mineC.toString())
 					mines[r][c]^=0x40;
 					drawRC(r,c);
 				}
@@ -291,6 +315,15 @@ tag:	haha
 			}
 		}
 	};
+	function drawTimeCol(row,text){
+		ctx.fillStyle = "#FFFFFF";
+		ctx.fillRect(canvas.width-cellpix*timeCols+2,cellpix/2+cellpix*row,cellpix*timeCols,cellpix);
+		ctx.font=cellpix/2+"px arial";
+		ctx.textAlign='center';
+		ctx.textBaseline='middle';
+		ctx.fillStyle="#000000";
+		ctx.fillText(text,canvas.width-timeCols/2*cellpix,cellpix+cellpix*row);
+	}
 	window.onresize = function(){
 		ctx.fillStyle="#FFFFFF";
 		ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -301,14 +334,8 @@ tag:	haha
 	timer = requestAnimationFrame(function wyt(){
 		var t=new Date().getTime();
 		if(t-oldT>=1000){
-			ctx.fillStyle = "#FFFFFF";
-			ctx.fillRect(canvas.width-cellpix*timeCols+2,cellpix/2,cellpix*timeCols,cellpix);
-			ctx.font=cellpix/2+"px arial";
-			ctx.textAlign='center';
-			ctx.textBaseline='middle';
-			ctx.fillStyle="#000000";
 			if(start>0) costTime++;
-			ctx.fillText("Time:"+(costTime).toString(),canvas.width-timeCols/2*cellpix,cellpix);
+			drawTimeCol(0,"Time:"+(costTime).toString());
 			oldT+=1000;
 		}
 		requestAnimationFrame(wyt);
