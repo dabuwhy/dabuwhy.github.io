@@ -4,9 +4,10 @@ title:  "hopeful life"
 date:   2019-04-20 00:00:00 +0000
 categories: jekyll new
 tag:	haha 
-musicId: [540042,]
+musicId: [28828074,]
+comments: true
 ---
-to sdwhwxt<br/>
+To sdwhwxt<br/>
 
 <canvas id="wy"></canvas> <!--canvas 画布-->
 

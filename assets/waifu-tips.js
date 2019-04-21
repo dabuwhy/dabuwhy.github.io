@@ -58,7 +58,7 @@ live2d_settings['waifuFontSize']        = '12px';       // 提示框字体，例
 live2d_settings['waifuToolFont']        = '14px';       // 工具栏字体，例如 '14px', '36px'
 live2d_settings['waifuToolLine']        = '20px';       // 工具栏行高，例如 '20px', '36px'
 live2d_settings['waifuToolTop']         = '0px'         // 工具栏顶部边距，例如 '0px', '-60px'
-live2d_settings['waifuMinWidth']        = '300px';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
+live2d_settings['waifuMinWidth']        = '768px';      // 面页小于 指定宽度 隐藏看板娘，例如 'disable'(禁用), '768px'
 live2d_settings['waifuEdgeSide']        = 'right:0';     // 看板娘贴边方向，例如 'left:0'(靠左 0px), 'right:30'(靠右 30px)
 live2d_settings['waifuDraggable']       = 'unlimited';    // 拖拽样式，例如 'disable'(禁用), 'axis-x'(只能水平拖拽), 'unlimited'(自由拖拽)
 live2d_settings['waifuDraggableRevert'] = false;         // 松开鼠标还原拖拽位置，可选 true(真), false(假)
@@ -92,16 +92,16 @@ String.prototype.render = function(context) {
 
 var re = /x/;
 console.log(re);
-
+var wy=-1;
 function empty(obj) {return typeof obj=="undefined"||obj==null||obj==""?true:false}
-function getRandText(text) {return Array.isArray(text) ? text[Math.floor(Math.random() * text.length + 1)-1] : text}
+function getRandText(text) { wy++;return Array.isArray(text) ? text[wy%text.length] : text}
 
-var wy=0;
+
 function showMessage(text, timeout, flag) {
     if(flag || sessionStorage.getItem('waifu-text') === '' || sessionStorage.getItem('waifu-text') === null){
         if(Array.isArray(text)){
-            text = text[wy%text.length];
             wy++;
+            text = text[wy%text.length];
         }
         if (live2d_settings.showF12Message) console.log('[Message]', text.replace(/<[^<>]+>/g,''));
         
@@ -206,13 +206,13 @@ function loadModel(modelId, modelTexturesId) {
 }
 
 function loadTipsMessage(result) {
-    $.each(result.mouseover, function (index, tips){
-        $(document).on("mouseover", tips.selector, function (){
-            var text = getRandText(tips.text);
-            text = text.render({text: $(this).text()});
-            showMessage(text, 3000);
-        });
-    });
+    // $.each(result.mouseover, function (index, tips){
+    //     $(document).on("mouseover", tips.selector, function (){
+    //         var text = getRandText(tips.text);
+    //         text = text.render({text: $(this).text()});
+    //         showMessage(text, 3000);
+    //     });
+    // });
     $.each(result.click, function (index, tips){
         $(document).on("click", tips.selector, function (){
             var text = getRandText(tips.text);
