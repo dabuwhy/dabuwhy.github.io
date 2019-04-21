@@ -11,6 +11,7 @@ tag:	haha
 <canvas id="canvas" ></canvas>
 rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:<input type="text" id="mineIn" />
 <input type="submit" value="SET" onclick="setIn()"/>
+<input type="submit" value="Back" onclick="javascript:history.go(-1)"/>
 
 <script type="text/javascript">
 	//author:wy
