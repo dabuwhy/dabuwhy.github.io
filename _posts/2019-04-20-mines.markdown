@@ -257,7 +257,7 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 		}
 		if((mouseState&0x03)==0x03){
 			mouseState=0x0c;
-			var [r,c]=getRC(e.x,e.y);
+			var [r,c]=getRC(e.pageX,e.pageY);
 			if(mines[r][c]>0x80){
 				var nei=getNeighbor(r,c);
 				for(var i=0;i<nei.length;i++){
@@ -275,12 +275,12 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 			if((mouseState&0x04)!=0){
 				mouseState&=0x0b;
 				if(mouseState==0){
-					var [r,c]=getRC(e.x,e.y);
+					var [r,c]=getRC(e.pageX,e.pageY);
 					lrclick(r,c);
 				}
 			}
 			else{
-				var [r,c]=getRC(e.x,e.y);
+				var [r,c]=getRC(e.pageX,e.pageY);
 				console.log(r,c);
 				if(minesAns.length==0){
 					generateMine(r,c);
@@ -295,12 +295,12 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 			if((mouseState&0x08)!=0){
 				mouseState&=0x07;
 				if(mouseState==0){
-					var [r,c]=getRC(e.x,e.y);						
+					var [r,c]=getRC(e.pageX,e.pageY);						
 					lrclick(r,c);
 				}
 			}
 			else{
-				var [r,c]=getRC(e.x,e.y);
+				var [r,c]=getRC(e.pageX,e.pageY);
 				//console.log(r,c);
 				if(mines[r][c]<0x80){
 					if((mines[r][c]&0x40)==0){
