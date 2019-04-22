@@ -18,7 +18,7 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 	var canvas=document.getElementById("canvas");
 	var ctx=canvas.getContext("2d");
 	var colors=['#6CA6CD','#FF3030','#EEC900','#3A5FCD','#008B00','#EE7621','#8B0A50','#CD69C9','#1874CD','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000','#000000'];
-	var cols=30,rows=16,cellpix=50,mCount=99,timeCols=4;
+	var cols=30,rows=16,cellpix=50,mCount=99,timeCols=4,oldT;
 	//var cols=10,rows=10,cellpix=50,mCount=10;
 	var mines=new Array();		//0:init 11-20:mine |0x40:flag |0x80:click
 	var minesAns=new Array();
@@ -145,6 +145,7 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 		drawTimeCol(1,"Mine:"+mineC.toString())
 	}
 	function restart(){
+		oldT=new Date().getTime();
 		minesAns=[];
 		space=cols*rows-mCount;
 		mineC=mCount;
@@ -331,7 +332,6 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 		init();
 	};
 	restart();
-	var oldT=new Date().getTime();
 	timer = requestAnimationFrame(function wyt(){
 		var t=new Date().getTime();
 		if(t-oldT>=1000){
