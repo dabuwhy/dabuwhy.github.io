@@ -117,7 +117,7 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 		cellpix=(i<j)?i:j;
 		//console.log(cellpix);
 		canvas.width=(cols+timeCols)*cellpix;
-		canvas.height=rows*cellpix;
+		canvas.height=rows*cellpix+1;
 		
 		ctx.lineWidth=1;
 		ctx.strokeStyle="#000000";
