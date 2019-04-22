@@ -335,9 +335,10 @@ rows:<input type="text" id="rowIn" />cols:<input type="text" id="colIn" />mines:
 	timer = requestAnimationFrame(function wyt(){
 		var t=new Date().getTime();
 		if(t-oldT>=1000){
-			if(start>0) costTime++;
+			var i=parseInt((t-oldT)/1000);
+			if(start>0) costTime+=i;
 			drawTimeCol(0,"Time:"+(costTime).toString());
-			oldT+=1000;
+			oldT+=1000*i;
 		}
 		requestAnimationFrame(wyt);
 	});
