@@ -13,8 +13,8 @@ comments: true
 ![](../assets/img/3.jpg) <br/><br/>
 <!--img src="../assets/img/1.jpg" width="70%" height="70%" /-->
 
-click [google][长三角电信用户] for more info<br/>
-click [baidu][长三角非电信用户] for more info<br/>
+click [google][China Telecom] for more info <br/>
+click [baidu][Not China Telecom] for more info <br/>
 
 [google]: http://dabuwhy.xyz <br/>
 [baidu]: http://dabuwhy.xyz:81 <br/>
