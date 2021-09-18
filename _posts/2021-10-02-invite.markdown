@@ -8,13 +8,15 @@ musicId: [31445474,]
 comments: true
 ---
 
-![](../assets/img/1.jpg)
-![](../assets/img/2.jpg)  
-![](../assets/img/3.jpg)  
-<!--img src="../assets/img/1.jpg" width="70%" height="70%" /-->  
+![](../assets/img/1.jpg) <br/>
+![](../assets/img/2.jpg) <br/>
+![](../assets/img/3.jpg) <br/>
+<!--img src="../assets/img/1.jpg" width="70%" height="70%" /-->
 
-[长三角电信用户]: http://dabuwhy.xyz
-[长三角非电信用户]：http://dabuwhy.xyz:81
+click [长三角电信用户][google] for more info<br/>
+click [长三角非电信用户][baidu] for more info<br/>
+[google]: http://dabuwhy.xyz <br/>
+[baidu]: http://dabuwhy.xyz:81 <br/>
 <mp3>https://music.163.com/song/media/outer/url?id={{page.musicId}}.mp3</mp3> <br/>
 
 
